@@ -1,24 +1,28 @@
-pipeline {
+pipeline { 
+  
+   agent any
+
+   stages {
+   
+     stage('Install Dependencies') { 
+        steps { 
+           sh 'npm install' 
+        }
+     }
      
-     stages {
-         stage('build step') {
-              steps {
-                 echo "Build stage is running"
-              }
+     stage('Test') { 
+        steps { 
+           sh 'echo "testing application..."'
+        }
+      }
+
+         stage("Deploy nodejs application") { 
+         steps { 
+           sh 'echo "deploying application..."'
          }
+
      }
-     post {
-         always {
-             echo "You can always see me"
-         }
-         success {
-              echo "I am running because the job ran successfully"
-         }
-         unstable {
-              echo "The build is unstable. Try fix it"
-         }
-         failure {
-             echo "The build failed"
-         }
-     }
-}
+  
+   	}
+
+   }
